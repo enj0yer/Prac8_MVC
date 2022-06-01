@@ -1,0 +1,11 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Ошибка оформления заказа, недостаточно товара на складе</h1>
+<a href="/Home/CheckBasket" id="return"><div class="btn btn-warning">Вернуться назад</div></a>
+
+
+<script>
+    timeout = setTimeout(() => document.getElementById("return").click(), 5000);
+</script>

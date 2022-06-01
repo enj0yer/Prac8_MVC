@@ -1,0 +1,42 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Просмотр корзины</h2>
+@model IEnumerable<Prac8_MVC.Models.Product>
+@if (Model.Count() == 0)
+{
+    <h3>Корзина пустая</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>Название товара</td>
+            <td>Описание</td>
+            <td>Цена</td>
+            <td>Количество</td>
+        </tr>
+        @foreach (Prac8_MVC.Models.Product product in Model)
+        {
+            <tr>
+                <td>@product.Name</td>
+                <td>@product.Description</td>
+                <td>@product.Price</td>
+                <td>@product.Number</td>
+            </tr>
+        }
+    </table>
+
+    <div style="width: 600px; margin: 20px auto; display: flex; justify-content: space-evenly">
+        <div class="btn btn--outline-primary">
+            @Html.ActionLink("Очистить корзину", "ClearBasket", "Home")
+        </div>
+        <div class="btn btn-outline-primary">
+            @Html.ActionLink("Оформить заказ", "Purchase", "Home")
+        </div>
+    </div>
+}
+
+
+

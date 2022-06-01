@@ -1,0 +1,59 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .add_element{
+        width: 30px;
+    }
+</style>
+
+<h2>Просмотр товаров</h2>
+@model IEnumerable<Prac8_MVC.Models.Product>
+@if (Model.Count() == 0)
+{
+    <h3>Товаров не найдено</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>Название</td>
+            <td>Описание</td>
+            <td>Цена</td>
+            <td>Добавить в корзину</td>
+            @{
+                if (Session["IsAdmin"] != null)
+                {
+                    <td>Кол-во на складе</td>
+                    <td>Удалить</td>
+                }
+            }
+
+
+        </tr>
+        @foreach (Prac8_MVC.Models.Product product in Model)
+        {
+    <tr id="product_@product.Id">
+        <td>@product.Name</td>
+        <td>@product.Description</td>
+        <td>@product.Price</td>
+        <td>
+            <div style="display: flex; width: 100px">
+                <p id="decrease_@product.Id" class="add_element" onclick="decrease(this)">-</p>
+                <p id="number_@product.Id" class="add_element">1</p>
+                <p id="increase_@product.Id" class="add_element" onclick="increase(this)">+</p>
+            </div>
+            <input id="add_@product.Id" type="button" class="btn btn-primary" value="Добавить в корзину" onclick="addToBasket(this)" />
+        </td>
+        @{
+            if (Session["IsAdmin"] != null)
+            {
+                <td>@product.Number</td>
+                <td><input type="button" id="delete_@product.Id" value="Удалить" class="btn btn-danger" onclick="deleteProduct(this)" /></td>
+            }
+        }
+    </tr>
+        }
+    </table>
+}

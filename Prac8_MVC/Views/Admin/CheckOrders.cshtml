@@ -1,0 +1,47 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<Prac8_MVC.Models.OrderWithCustomer>
+@if (Model.Count() == 0)
+{
+    <h2>Заказы не найдены</h2>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <td>Id</td>
+            <td>Цена</td>
+            <td>Информация о товарах</td>
+            <td>ФИО заказчика</td>
+            <td>Email заказчика</td>
+            <td>Телефон заказчика</td>
+            <td>Действия</td>
+        </tr>
+        @foreach (Prac8_MVC.Models.OrderWithCustomer order in Model)
+        {
+            <tr id="order_@order.Id">
+                <td>@order.Id</td>
+                <td>@order.Price</td>
+                <td>
+                    @{
+                        string[] productsInfo = order.Products.Split('\\');
+                        foreach (string productInfo in productsInfo)
+                        {
+                            <p>@productInfo</p>
+                        }
+                    }
+                </td>
+                <td>@order.Customer.Surname<br />@order.Customer.Name<br />@order.Customer.Pat</td>
+                <td>@order.Customer.Email</td>
+                <td>@order.Customer.PhoneNumber</td>
+                @if(Session["IsAdmin"] != null)
+                {
+                    <td><input type="button" class="btn btn-outline-danger" value="Удалить" onclick="deleteOrder(this)" id="delete_@order.Id"></td>
+                }
+            </tr>
+        }
+    </table>
+
+}

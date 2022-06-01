@@ -1,0 +1,25 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Session["IsAdmin"] == null)
+{
+    <h1>Доступ запрещен</h1>
+}
+else
+{
+    <div style="display: flex; width: 400px; justify-content: space-evenly">
+        <div class="btn btn-outline-primary">
+            @Html.ActionLink("Заказы", "CheckOrders", "Admin")
+        </div>
+
+        <div class="btn btn-outline-primary">
+            @Html.ActionLink("Товары", "AddProduct", "Admin")
+        </div>
+
+        <div class="btn btn-outline-danger">
+            @Html.ActionLink("Выйти", "Exit", "Admin")
+        </div>
+    </div>
+}
+

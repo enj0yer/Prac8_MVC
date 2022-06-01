@@ -1,0 +1,28 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model Prac8_MVC.Models.Product
+<br>
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.TextBoxFor(model => model.Name, new { placeholder = "Название" })
+    </div>
+
+    <div>
+        @Html.TextBoxFor(model => model.Description, new { placeholder = "Описание" })
+    </div>
+
+    <div>
+        @Html.TextBoxFor(model => model.Price , new { placeholder = "Цена" })
+    </div>
+
+    <div>
+        @Html.TextBoxFor(model => model.Number, new { type = "number", min = "0", placeholder = "Кол-во" })
+    </div>
+
+    <input type="submit" value="Добавить / Изменить" class="btn btn-primary"/>
+}
+
+
